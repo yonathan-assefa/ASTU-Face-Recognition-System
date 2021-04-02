@@ -4,6 +4,13 @@ from django.db import models
 
 from django.db import models
 
+
+cafe_choice = [
+	('C','Cafe'),
+	('NC','None Cafe')
+]
+
+
 class Department(models.Model):
 	department = models.CharField(max_length = 200)
 
@@ -28,9 +35,13 @@ class Student(models.Model):
 	name = models.CharField(max_length = 150)
 	id_n = models.CharField(max_length = 12)
 	
+	cafe_status = models.CharField(max_length = 2, choices = cafe_choice)
+
 	dept = models.ForeignKey(Department, on_delete = models.PROTECT)
 	field_of_study = models.ForeignKey(FieldOfStudy, on_delete = models.PROTECT)
 	year_of_study = models.ForeignKey(YearOfStudy, on_delete = models.PROTECT)
+
+
 
 	def __str__(self):
 		return self.name

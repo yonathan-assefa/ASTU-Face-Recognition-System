@@ -27,8 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
+AUTH_USER_MODEL = 'users_app.UserProfile'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'channels',
     'django_redis',
     'facex',
+    'users_app',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -76,15 +78,15 @@ WSGI_APPLICATION = 'ex2.wsgi.application'
 ASGI_APPLICATION = 'ex2.asgi.application'
 
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/1',
-        "OPTIONS": {
-            "CLIENT_CLASS":"django_redis.client.DefaultClient",
-        }
-    }
-}
+#CACHES = {
+#    'default': {
+        #'BACKEND': 'django_redis.cache.RedisCache',
+        #'LOCATION': 'redis://127.0.0.1:6379/1',
+        #"OPTIONS": {
+         #   "CLIENT_CLASS":"django_redis.client.DefaultClient",
+#        }
+#    }
+#}
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
