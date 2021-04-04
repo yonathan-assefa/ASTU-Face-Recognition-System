@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Student Registration Page</title>
+</head>
+<body>
+	<h2 >RRRegister</h2>
+<form action="{% url 'register'%}" method="POST" enctype="multipart/form-data">
+	{% csrf_token%}
+	<!--{% if form1.errors %}
+
+		<p>Your form has errors...</p>
+		{% for field in form1%}
+		{%if field.error%}
+			{{ field }}
+		{%endif%}
+		{% endfor %}
+
+	{% endif %}-->
+	{{ form1.as_p }}
+	{{ form2.as_p }}
+	
+<input type="submit" name="" value="Register" >
+</form>
+
+</body>
+</html>

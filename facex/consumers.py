@@ -18,7 +18,7 @@ from django.shortcuts import render
 
 import requests
 
-from .models import *
+from users_app.models import *
 
 
 class WSConsumer(WebsocketConsumer):
@@ -115,12 +115,13 @@ class WSConsumer(WebsocketConsumer):
 				font = cv2.FONT_HERSHEY_SIMPLEX
 				
 				if name != 'Unknown face detected':
-					send_id = Student.objects.filter(id_n=id_s[best_match_index])
+					send_id = UserProfile.objects.filter(username=id_s[best_match_index])
 					self.send(json.dumps({
-						'name':send_id[0].name,
-						"id":send_id[0].id_n,
-						"Department":send_id[0].dept.department,
-						"img":send_id[0].image.url,
+						'name':send_id[0].first_name + ' ' + send_id[0].middle_name 
+							   + ' ' + send_id[0].last_name,
+						"id":send_id[0].username,
+						"Department":send_id[0].user.dept.department,
+						"img":send_id[0].profile_picture.url,
 						}))
 					sleep(5)
 					cv2.rectangle(frame, (left,top), (right, bottom), (51,51,51), 2)

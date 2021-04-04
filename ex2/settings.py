@@ -37,12 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites', #Additional For making migrations(makemigration error table doesnot exsit django_site)
     'channels',
-    'django_redis',
+    'django_extensions',
     'facex',
     'users_app',
 ]
 
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -12,7 +12,7 @@ class UserAdmin(BaseUserAdmin):
       (None, {'fields': ('username','email', 'password',)}),
       #(_('Student Information'), {'fields': ('user.cafe_status',)}),
       (_('Personal info'), {'fields': ('first_name', 'last_name',
-      									'sex','date_of_birth','region','profile_picture',)}),
+      									'profile_picture',)}),
       (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                      'groups', 'user_permissions')}),
       (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
