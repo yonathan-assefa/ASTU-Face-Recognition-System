@@ -6,11 +6,11 @@
 	<title>Index</title>
 </head>
 <body>
-
+	<div id='img'></div>
 	<h2 id='name'>{{text}}</h2> 
 	<h3 id='id'></h3>
 	<h3 id='dept'></h3>
-	<div id='img'></div>
+	
 
 	<script>
 		
@@ -26,7 +26,7 @@
 			 	 document.querySelector('#name').innerText = data.name;
 				 document.querySelector('#id').innerText = data.id;
 				 document.querySelector('#dept').innerText = data.Department;
-				 document.querySelector('#img').innerText = data.img;
+				 //document.querySelector('#img').innerText = data.img;
 				 var el = document.getElementById("img");
    				 el.innerHTML=`<img src= ${data.img}>`;
    				 //alert(`${window.location.origin}{{ data.img }}`)

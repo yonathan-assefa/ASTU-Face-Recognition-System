@@ -123,7 +123,7 @@ class WSConsumer(WebsocketConsumer):
 						"Department":send_id[0].user.dept.department,
 						"img":send_id[0].profile_picture.url,
 						}))
-					sleep(5)
+					sleep(3)
 					cv2.rectangle(frame, (left,top), (right, bottom), (51,51,51), 2)
 					cv2.rectangle(frame, (10, 350),(250, 500),(51,51,51),cv2.FILLED)
 
