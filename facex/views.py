@@ -3,7 +3,7 @@ from .forms import StudentForm, UserPro
 from users_app.models import UserProfile
 from django.views.generic import ListView,DetailView
 
-from .models import StudentLog
+from .models import StudentLog, Student
 
 from django.http import HttpResponse
 
@@ -25,34 +25,51 @@ def iv(request):
 	return HttpResponse('<h2>favicon.ico</h2>')
 
 
-def setter(form2,profile_form,form1,temp):
+def setter(form2,profile_form,form1):
 	passwd = form2.cleaned_data['password1']
-	print(passwd)
 	profile_form.set_password(passwd)
 	#profile_form.id = form2.cleaned_data['id']
 	profile_form.username = form1.cleaned_data['id_n']
 	profile_form.first_name = form2.cleaned_data['first_name']
 	profile_form.last_name = form2.cleaned_data['last_name']
 	profile_form.phone = form2.cleaned_data['phone']
-	profile_form.user = temp
 	profile_form.profile_picture = form1.cleaned_data['image']
 	profile_form.middle_name = form2.cleaned_data['middle_name']
 	#form2.profile_picture = form1.cleaned_data['image']
 	profile_form.email = form1.cleaned_data['email']
+	#profile_form = profile_form.save()
 	return profile_form
+
+def stud_setter(form1,profile_form):
+	student_form = Student()
+	student_form.user_profile = profile_form
+	student_form.image = form1.cleaned_data['image']
+	student_form.school_program = form1.cleaned_data['school_program']
+	student_form.field_of_study = form1.cleaned_data['field_of_study']
+	student_form.department = form1.cleaned_data['department']
+	student_form.id_n = form1.cleaned_data['id_n']
+	student_form.sex = form1.cleaned_data['sex']
+	student_form.year_of_study = form1.cleaned_data['year_of_study']
+	student_form.cafe_status = form1.cleaned_data['cafe_status']
+	student_form.school = form1.cleaned_data['school']
+	student_form.date_of_birth = form1.cleaned_data['date_of_birth']
+	student_form.region = form1.cleaned_data['region']
+	return student_form
+
+
 
 
 @never_cache
 def register_user(request):
 	if request.method == 'POST':
 		form1 = StudentForm(request.POST, request.FILES)
-		form2 = UserPro(request.POST, request.FILES)
+		form2 = UserPro(request.POST)
 		if form1.is_valid() and form2.is_valid():
 			profile_form = UserProfile()
-			temp = form1.save(commit = False)
-			profile_form = setter(form2,profile_form,form1,temp)
-			form1.save(commit = True)
+			profile_form = setter(form2,profile_form,form1)
+			student_form = stud_setter(form1,profile_form)
 			profile_form.save()
+			student_form.save()
 			print("Successfully wiped")
 			return redirect('register')
 		else:

@@ -4,7 +4,7 @@ from django.utils import timezone
 from datetime import date
 
 from smart_selects.db_fields import ChainedForeignKey
-
+from users_app.models import UserProfile
 
 cafe_choice = [
 	('C','Cafe'),
@@ -92,6 +92,7 @@ class Department(models.Model):
 
 class Student(models.Model):
 	school_program = models.ForeignKey(SchoolProgram, on_delete = models.PROTECT)
+	user_profile = models.OneToOneField(UserProfile, on_delete = models.CASCADE, unique = True)
 	field_of_study =  ChainedForeignKey(
         FieldOfStudy,
         chained_field="school_program",
@@ -119,7 +120,6 @@ class Student(models.Model):
 	sex = models.CharField(max_length = 1 , choices = sex_choice)
 	cafe_status = models.CharField(max_length = 2, choices = cafe_choice)
 	year_of_study = models.CharField(choices = YearOfStudy_choice, max_length = 2)
-	email = models.EmailField(null = True, blank =True)
 	date_of_birth = models.DateField()
 	region = models.CharField(max_length = 4, choices = region_choice)
 

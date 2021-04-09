@@ -23,9 +23,10 @@ class UserPro(UserCreationForm):
 
 
 class StudentForm(forms.ModelForm):
+	email = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Email','Label':'Email'}))
 	class Meta:
 		model = Student
-		fields = ('__all__')
+		fields = ('school_program','field_of_study','school','department','image','id_n','sex','cafe_status','year_of_study','date_of_birth','region')
 		'''
 		widgets = {
 			'field_of_study' : forms.Select(choices = 'fieldofstudy_choice'),
