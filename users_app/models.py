@@ -11,3 +11,6 @@ class UserProfile(AbstractUser):
 	phone = models.CharField(max_length = 10, null = True, blank =True)
 	profile_picture = models.ImageField(upload_to = 'profile_picture/%y%m%d')
 
+	def __str__(self):
+		return self.username
+

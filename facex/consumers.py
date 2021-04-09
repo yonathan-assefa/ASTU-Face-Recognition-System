@@ -21,6 +21,11 @@ import requests
 from users_app.models import *
 
 
+from datetime import datetime, date
+from django.utils import timezone
+
+
+
 class WSConsumer(WebsocketConsumer):
 	def connect(self):
 		self.accept()
@@ -31,7 +36,7 @@ class WSConsumer(WebsocketConsumer):
 #			sleep(1)
 
 
-
+		
 		x = Student.objects.all()
 
 		f_encs = []
@@ -92,6 +97,11 @@ class WSConsumer(WebsocketConsumer):
 
 		n = []
 		for i in range(200):
+
+			date_time = datetime.now()
+			logname = str(timezone.now().date())
+			log = open("logs/"+logname+".lf", "a")
+
 			ret, frame = video_capture.read()
 
 			rgb_frame = frame[:,:,::-1]
@@ -116,13 +126,20 @@ class WSConsumer(WebsocketConsumer):
 				
 				if name != 'Unknown face detected':
 					send_id = UserProfile.objects.filter(username=id_s[best_match_index])
-					self.send(json.dumps({
-						'name':send_id[0].first_name + ' ' + send_id[0].middle_name 
-							   + ' ' + send_id[0].last_name,
-						"id":send_id[0].username,
-						"Department":send_id[0].user.dept.department,
-						"img":send_id[0].profile_picture.url,
-						}))
+					#cur_time = date_time.time()
+					#log.write(str(cur_time) + '$' + send_id[0].username +'|')
+					#log.close()
+					try:
+						self.send(json.dumps({
+							'name':send_id[0].first_name,
+							"id":send_id[0].username,
+							"Department":send_id[0].user.department.department,
+							"img":send_id[0].profile_picture.url,
+							}))
+					except:
+						print(send_id[0].first_name)
+						print(send_id[0].username)
+						print(send_id[0].user.department.department)
 					sleep(3)
 					cv2.rectangle(frame, (left,top), (right, bottom), (51,51,51), 2)
 					cv2.rectangle(frame, (10, 350),(250, 500),(51,51,51),cv2.FILLED)

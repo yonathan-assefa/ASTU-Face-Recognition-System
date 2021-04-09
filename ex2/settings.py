@@ -40,18 +40,23 @@ INSTALLED_APPS = [
     'django.contrib.sites', #Additional For making migrations(makemigration error table doesnot exsit django_site)
     'channels',
     'django_extensions',
+    'smart_selects',
     'facex',
     'users_app',
+    'beau',
 ]
+
+USE_DJANGO_JQUERY = True
+
 
 SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.cache.UpdateCacheMiddleware',
+    # 'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
+    # 'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',

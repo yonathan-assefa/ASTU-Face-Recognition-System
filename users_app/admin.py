@@ -11,7 +11,7 @@ class UserAdmin(BaseUserAdmin):
   fieldsets = (
       (None, {'fields': ('username','email', 'password',)}),
       #(_('Student Information'), {'fields': ('user.cafe_status',)}),
-      (_('Personal info'), {'fields': ('first_name', 'last_name',
+      (_('Personal info'), {'fields': ('first_name','middle_name' ,'last_name',
       									'profile_picture',)}),
       (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                      'groups', 'user_permissions')}),
@@ -24,7 +24,7 @@ class UserAdmin(BaseUserAdmin):
           'fields': ('email', 'password1', 'password2'),
       }),
   )
-  list_display = ['email', 'first_name', 'last_name', 'is_staff', "phone"]
+  list_display = ['username', 'first_name', 'last_name', 'is_staff','is_superuser', "phone"]
   search_fields = ('email', 'first_name', 'last_name')
   ordering = ('email', )
 
