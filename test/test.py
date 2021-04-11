@@ -1,4 +1,4 @@
-from pathlib import Path 
+from pathlib import Path
 
 fol = Path("./../logs/").rglob('*.lf')
 

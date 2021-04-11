@@ -1,28 +1,30 @@
 import json
-
-from random import randint 
+import logging
+from datetime import date, datetime
+from random import randint
 from time import sleep
 
-
-from channels.generic.websocket import WebsocketConsumer
-
-
-import numpy as np
-import face_recognition as fr
 import cv2
-
+import face_recognition as fr
+import numpy as np
+import requests
+from channels.generic.websocket import WebsocketConsumer
 from django.shortcuts import render
+from django.utils import timezone
+
+from facex.models import Student
+from users_app.models import *
+
 #import os
 #os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Rose.settings')
 #import django
 
-import requests
-
-from users_app.models import *
 
 
-from datetime import datetime, date
-from django.utils import timezone
+
+
+
+
 
 
 
@@ -94,13 +96,14 @@ class WSConsumer(WebsocketConsumer):
 
 
 	#	]
-
+		#logname = str(datetime.today())
+		#logging.basicConfig(filename = "logs/"+logname)
 		n = []
 		for i in range(200):
 
-			date_time = datetime.now()
-			logname = str(timezone.now().date())
-			log = open("logs/"+logname+".lf", "a")
+			#date_time = datetime.now()
+			#logname = str(timezone.now().date())
+			#log = open("logs/"+logname+".lf", "a")
 
 			ret, frame = video_capture.read()
 
@@ -125,21 +128,16 @@ class WSConsumer(WebsocketConsumer):
 				font = cv2.FONT_HERSHEY_SIMPLEX
 				
 				if name != 'Unknown face detected':
-					send_id = UserProfile.objects.filter(username=id_s[best_match_index])
+					send_id = Student.objects.filter(id_n=id_s[best_match_index])
 					#cur_time = date_time.time()
 					#log.write(str(cur_time) + '$' + send_id[0].username +'|')
 					#log.close()
-					try:
-						self.send(json.dumps({
-							'name':send_id[0].first_name,
-							"id":send_id[0].username,
-							"Department":send_id[0].user.department.department,
-							"img":send_id[0].profile_picture.url,
-							}))
-					except:
-						print(send_id[0].first_name)
-						print(send_id[0].username)
-						print(send_id[0].user.department.department)
+					self.send(json.dumps({
+						'name':send_id[0].user_profile.first_name,
+						"id":send_id[0].id_n,
+						"Department":send_id[0].department.department,
+						"img":send_id[0].user_profile.profile_picture.url,
+						}))
 					sleep(3)
 					cv2.rectangle(frame, (left,top), (right, bottom), (51,51,51), 2)
 					cv2.rectangle(frame, (10, 350),(250, 500),(51,51,51),cv2.FILLED)

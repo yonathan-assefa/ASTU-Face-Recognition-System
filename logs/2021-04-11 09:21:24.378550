@@ -1,0 +1,49 @@
+WARNING:daphne.server:Application instance <Task pending coro=<StaticFilesWrapper.__call__() running at /home/iris/Documents/Pros/pro204/lib/python3.6/site-packages/channels/staticfiles.py:44> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /usr/lib/python3.6/asyncio/futures.py:403, <TaskWakeupMethWrapper object at 0x7f531c0acd38>()]>> for connection <WebSocketProtocol client=['127.0.0.1', 38492] path=b'/ws/some_url/'> took too long to shut down and was killed.
+INFO:django.channels.server:[mHTTP GET /facex/index/ 200 [24.57, 127.0.0.1:38490][0m
+INFO:django.channels.server:WebSocket HANDSHAKING /ws/some_url/ [127.0.0.1:38494]
+INFO:django.channels.server:WebSocket CONNECT /ws/some_url/ [127.0.0.1:38494]
+ERROR:daphne.server:Exception inside application: attempt to get argmin of an empty sequence
+Traceback (most recent call last):
+  File "/home/iris/Documents/Pros/pro204/lib/python3.6/site-packages/channels/staticfiles.py", line 44, in __call__
+    return await self.application(scope, receive, send)
+  File "/home/iris/Documents/Pros/pro204/lib/python3.6/site-packages/channels/routing.py", line 71, in __call__
+    return await application(scope, receive, send)
+  File "/home/iris/Documents/Pros/pro204/lib/python3.6/site-packages/channels/sessions.py", line 47, in __call__
+    return await self.inner(dict(scope, cookies=cookies), receive, send)
+  File "/home/iris/Documents/Pros/pro204/lib/python3.6/site-packages/channels/sessions.py", line 254, in __call__
+    return await self.inner(wrapper.scope, receive, wrapper.send)
+  File "/home/iris/Documents/Pros/pro204/lib/python3.6/site-packages/channels/auth.py", line 181, in __call__
+    return await super().__call__(scope, receive, send)
+  File "/home/iris/Documents/Pros/pro204/lib/python3.6/site-packages/channels/middleware.py", line 26, in __call__
+    return await self.inner(scope, receive, send)
+  File "/home/iris/Documents/Pros/pro204/lib/python3.6/site-packages/channels/routing.py", line 160, in __call__
+    send,
+  File "/home/iris/Documents/Pros/pro204/lib/python3.6/site-packages/channels/consumer.py", line 94, in app
+    return await consumer(scope, receive, send)
+  File "/home/iris/Documents/Pros/pro204/lib/python3.6/site-packages/channels/consumer.py", line 62, in __call__
+    await await_many_dispatch([receive], self.dispatch)
+  File "/home/iris/Documents/Pros/pro204/lib/python3.6/site-packages/channels/utils.py", line 51, in await_many_dispatch
+    await dispatch(result)
+  File "/home/iris/Documents/Pros/pro204/lib/python3.6/site-packages/asgiref/sync.py", line 304, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "/usr/lib/python3.6/asyncio/tasks.py", line 339, in wait_for
+    return (yield from fut)
+  File "/usr/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/iris/Documents/Pros/pro204/lib/python3.6/site-packages/channels/db.py", line 13, in thread_handler
+    return super().thread_handler(loop, *args, **kwargs)
+  File "/home/iris/Documents/Pros/pro204/lib/python3.6/site-packages/asgiref/sync.py", line 343, in thread_handler
+    return func(*args, **kwargs)
+  File "/home/iris/Documents/Pros/pro204/lib/python3.6/site-packages/channels/consumer.py", line 125, in dispatch
+    handler(message)
+  File "/home/iris/Documents/Pros/pro204/lib/python3.6/site-packages/channels/generic/websocket.py", line 39, in websocket_connect
+    self.connect()
+  File "/home/iris/Documents/Pros/Exiperment house/ex2/facex/consumers.py", line 127, in connect
+    best_match_index = np.argmin(face_distance)
+  File "<__array_function__ internals>", line 6, in argmin
+  File "/home/iris/Documents/Pros/pro204/lib/python3.6/site-packages/numpy/core/fromnumeric.py", line 1269, in argmin
+    return _wrapfunc(a, 'argmin', axis=axis, out=out)
+  File "/home/iris/Documents/Pros/pro204/lib/python3.6/site-packages/numpy/core/fromnumeric.py", line 58, in _wrapfunc
+    return bound(*args, **kwds)
+ValueError: attempt to get argmin of an empty sequence
+INFO:django.channels.server:WebSocket DISCONNECT /ws/some_url/ [127.0.0.1:38494]

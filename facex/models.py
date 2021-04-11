@@ -1,28 +1,14 @@
-from django.db import models
-from django.utils import timezone
-
 from datetime import date
 
+from django.db import models
+from django.utils import timezone
 from smart_selects.db_fields import ChainedForeignKey
+
 from users_app.models import UserProfile
 
 cafe_choice = [
 	('C','Cafe'),
 	('NC','None Cafe')
-]
-
-region_choice = [
-	('AA', 'Addis Ababa'),
-	('AF','Afar'),
-	('AM','Amhara'),
-	('BN','Benishangul-Gumuz'),
-	('DD','Dire Dawa'),
-	('GM','Gambela'),
-	('HR','Harari'),
-	('Or','Oromiya'),
-	('SD','Sidama'),
-	('SNNP','Southern Nations, Nationalities, and Peoples'),
-	('TG','Tigray'),
 ]
 
 
@@ -120,9 +106,6 @@ class Student(models.Model):
 	sex = models.CharField(max_length = 1 , choices = sex_choice)
 	cafe_status = models.CharField(max_length = 2, choices = cafe_choice)
 	year_of_study = models.CharField(choices = YearOfStudy_choice, max_length = 2)
-	date_of_birth = models.DateField()
-	region = models.CharField(max_length = 4, choices = region_choice)
-
 
 	def __str__(self):
 		return self.id_n
@@ -130,6 +113,7 @@ class Student(models.Model):
 
 
 class StudentLog(models.Model):
-	date = models.DateField(default = date.today, unique=True)
+	log_history = models.FileField(upload_to = 'media/logs/%y/%m')
+	log_date = models.DateTimeField(default = timezone.now)
 	def __str__(self):
-		return self.date.__str__()
+		return self.log_date.__str__()

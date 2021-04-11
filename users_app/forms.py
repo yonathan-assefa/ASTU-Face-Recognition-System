@@ -1,22 +1,18 @@
-from django import forms 
+from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+
+from facex.models import Student
 
 from .models import UserProfile
-from facex.models import Student
 
 User = get_user_model()
 
-'''
-class StudentForm(forms.ModelForm):
+
+class EditProfileForm(UserChangeForm):
+	password = forms.CharField(label="",required = False ,widget = forms.TextInput(attrs = {'type':'hidden',}))
 	class Meta:
-		model = Student
-		fields = ('image','name','id_n','cafe_status','year_of_study','field_of_study','dept')
+		model = User
+		fields = ('username','email','phone','region','date_of_birth','profile_picture')
 
 
-class ProfileForm(forms.ModelForm):
-	class Meta:
-		model = UserProfile
-		fields = ('user','sex','phone','email','date_of_birth','region','profile_picture')
-
-'''

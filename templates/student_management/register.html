@@ -1,11 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Student Registration Page</title>
-</head>
-<body>
-	<h2 >RRegister</h2>
-<form action="{% url 'register'%}" method="POST" enctype="multipart/form-data">
+{% extends 'student_management/base.html'%}
+
+
+{%block title %}
+	Register
+{% endblock title %}
+
+{% block link %}
+	<a href="{% url  'login'%}" title="" >login</a>
+{% endblock link %}
+
+
+{%block content%}
+	<h2 >Register</h2>
+<form action="{% url 'sign'%}" method="POST" enctype="multipart/form-data">
 	{% csrf_token %}
 	<!--{% if form1.errors %}
 
@@ -17,13 +24,12 @@
 		{% endfor %}
 
 	{% endif %}-->
-	{{form1.media.js}}
-	{{ form1.as_p }}
- 	{{ form2.as_p }} 
+	{{student_form.media.js}}
+	{{ student_form.as_p }}
+ 	{{ user_form.as_p }} 
  	<label>{{form2.first_name.label}}</label>
  	
 <input type="submit" name="" value="Register">
 </form>
 
-</body>
-</html>
+{%endblock content%}
