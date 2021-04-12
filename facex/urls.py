@@ -4,9 +4,11 @@ from .views import *
 
 urlpatterns = [
 
-	path('index/',TemplateView.as_view(template_name='student_management/home.html'), name='index'),
+	#path('index/',TemplateView.as_view(template_name='student_management/home.html'), name='index'),
+	path('index/',index, name='index'),
 	#path('register/',register_user, name='register'),
 	#path('logs/',log_list_view, name='logs'),
 	path('sign/', SignUpView.as_view(), name='sign'),
+	path('log/', log, name='log'),
 ]
 

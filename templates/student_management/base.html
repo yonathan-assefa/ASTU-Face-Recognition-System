@@ -18,7 +18,14 @@
 
 		<a href="{% url 'logout'%}" title="" >logout</a>
 		{% block edit %}
+
 		{% endblock edit%}
+
+		{% block change %}
+
+		{% endblock change%}
+
+
 	{% if user.is_staff %}
 		<a href="{% url 'admin:index' %}">Admin Page</a>
 		<a href="{% url 'index' %}">Active camera</a>

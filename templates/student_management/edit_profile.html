@@ -6,7 +6,7 @@
 {% endblock title %}
 
 
-{%block content%}
+{%block change%}
 	 <h2 >Edit Profile</h2>
 <form action="{% url 'edit_profile'%}" method="POST" accept-charset="utf-8">
 	{% csrf_token%}

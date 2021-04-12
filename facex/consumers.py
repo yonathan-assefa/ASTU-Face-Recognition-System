@@ -20,7 +20,8 @@ from users_app.models import *
 #import django
 
 
-
+#from HTMLLogger import HTMLLogger
+#logger=HTMLLogger(name="Test App", html_filename="templates/logs/log.html", console_log=True)
 
 
 
@@ -138,10 +139,10 @@ class WSConsumer(WebsocketConsumer):
 						"Department":send_id[0].department.department,
 						"img":send_id[0].user_profile.profile_picture.url,
 						}))
-					sleep(3)
+					#logger.info(str(send_id[0].id_n))
 					cv2.rectangle(frame, (left,top), (right, bottom), (51,51,51), 2)
 					cv2.rectangle(frame, (10, 350),(250, 500),(51,51,51),cv2.FILLED)
-
+					sleep(3)
 					
 					name = name.split('\n')
 					p = 0

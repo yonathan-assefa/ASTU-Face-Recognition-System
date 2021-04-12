@@ -133,3 +133,6 @@ class SignUpView(LoginRequiredMixin, PermissionRequiredMixin, FormView):
 # def log_list_view(request):
 # 	return HttpResponse('<h3>Hello papa</h3>')
 
+
+def log(request):
+	return render(request,'logs/log.html')
