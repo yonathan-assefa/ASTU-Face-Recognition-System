@@ -6,6 +6,7 @@ from smart_selects.db_fields import ChainedForeignKey
 
 from users_app.models import UserProfile
 
+
 cafe_choice = [
 	('C','Cafe'),
 	('NC','None Cafe')
@@ -112,8 +113,5 @@ class Student(models.Model):
 
 
 
-class StudentLog(models.Model):
-	log_history = models.FileField(upload_to = 'media/logs/%y/%m')
-	log_date = models.DateTimeField(default = timezone.now)
-	def __str__(self):
-		return self.log_date.__str__()
+
+

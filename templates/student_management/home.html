@@ -8,4 +8,9 @@
 {% block index %}
 <h1>Welcome Home papa</h1>
 
+{% if perms.facex.add_userprofile %}
+	<a href="{% url 'sign' %}">Register Users</a>
+{% endif %}
+
+<a href="{% url 'edit_profile' %}"> Edit Profile </a>
 {% endblock index %}

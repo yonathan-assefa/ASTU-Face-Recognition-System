@@ -1,8 +1,14 @@
 from datetime import date
 
+from django.db.models.signals import post_delete
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.db import models
+
+
+
+
+
 
 region_choice = [
 	('AA', 'Addis Ababa'),
@@ -43,4 +49,5 @@ class UserProfile(AbstractUser):
 
 	def __str__(self):
 		return self.username
+
 

@@ -5,13 +5,11 @@
 	Register
 {% endblock title %}
 
-{% block link %}
-	<a href="{% url  'login'%}" title="" >login</a>
-{% endblock link %}
-
 
 {%block content%}
-	<h2 >Register</h2>
+
+
+
 <form action="{% url 'sign'%}" method="POST" enctype="multipart/form-data">
 	{% csrf_token %}
 	<!--{% if form1.errors %}
@@ -24,6 +22,8 @@
 		{% endfor %}
 
 	{% endif %}-->
+	{{ student_form.errors }}
+	{{ user_form.errors }}
 	{{student_form.media.js}}
 	{{ student_form.as_p }}
  	{{ user_form.as_p }} 

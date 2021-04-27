@@ -9,6 +9,5 @@ urlpatterns = [
 	#path('register/',register_user, name='register'),
 	#path('logs/',log_list_view, name='logs'),
 	path('sign/', SignUpView.as_view(), name='sign'),
-	path('log/', log, name='log'),
 ]
 

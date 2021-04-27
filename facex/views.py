@@ -9,12 +9,13 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.decorators.cache import never_cache
 from django.views.generic import FormView, DetailView, ListView, RedirectView
-
 from users_app.models import UserProfile
 
 from .forms import StudentForm, UserPro
-from .models import Student, StudentLog
+from .models import Student
 
+
+import face_recognition
 
 @login_required
 def index(request):
@@ -67,20 +68,35 @@ class SignUpView(LoginRequiredMixin, PermissionRequiredMixin, FormView):
 	success_url = reverse_lazy('sign')
 
 	def form_valid(self, form):
-		user = form.save()
 		student_form = StudentForm(self.request.POST, self.request.FILES)
-		student = student_form.save(commit=False)
+		if student_form.is_valid():
+			student = student_form.save(commit=False)
+		else:
+			return self.form_invalid(student_form)
+			
+		image = face_recognition.load_image_file(student.image)
+		face_rec = face_recognition.face_locations(image)
+		user = form.save()
 		user.username = student.id_n
 		user.profile_picture = student.image
 		student.user_profile = user
 		student.save()
 		user.save()
-		return HttpResponseRedirect(self.get_success_url())
-			
+		return HttpResponseRedirect(self.get_success_url())	
+
 	def render_to_response(self, context, **response_kwargs):
+		# if isinstance(context['form'], StudentForm):
+		# context['student_form'] = self.get_form(form_class=StudentForm) # context['form']StudentForm()
+		# context['user_form'] = self.get_form(form_class=UserPro)
+		if isinstance(context['form'], StudentForm):
+			context['user_form'] = UserPro()
+			context['student_form'] = context['form']
 		context['user_form'] = context['form']
 		context['student_form'] = StudentForm()
 		return super().render_to_response(context, **response_kwargs)
+
+
+
 
 
 
@@ -134,5 +150,5 @@ class SignUpView(LoginRequiredMixin, PermissionRequiredMixin, FormView):
 # 	return HttpResponse('<h3>Hello papa</h3>')
 
 
-def log(request):
-	return render(request,'logs/log.html')
+# def log(request):
+# 	return render(request,'logs/log.html')

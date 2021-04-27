@@ -63,6 +63,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'ex2.urls'
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 TEMPLATES = [
     {

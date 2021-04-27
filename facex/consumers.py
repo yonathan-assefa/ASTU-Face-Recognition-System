@@ -15,6 +15,7 @@ from django.utils import timezone
 from facex.models import Student
 from users_app.models import *
 
+
 #import os
 #os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Rose.settings')
 #import django
